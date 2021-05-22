@@ -56,7 +56,7 @@ main .result-label {
 
 main .result-label h3#result-value {
     font-size: 10vw;
-    color: #2C7063;
+    color: #ffffff;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -303,4 +303,8 @@ tr:last-child {
     .cards {
         column-count: 3;
     }
+}
+
+#app {
+    height: 100%;
 }

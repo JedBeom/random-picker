@@ -2,6 +2,7 @@ let app = new Vue({
     el: '#app',
     data: {
         items: ["-"],
+        title: "",
         index: 0,
         running: false,
         eventBuffer: null,
@@ -27,6 +28,7 @@ let app = new Vue({
             let tmpTime = this.startTime
             this.running = true
             this.items = items.groups[items.activedIndex].items.split('\n')
+            this.title = items.groups[items.activedIndex].title
             if (this.items.length === 1) {
                 if (this.items[0] === "") {
                     this.items = ["-"]
@@ -78,8 +80,8 @@ let items = new Vue({
     data: {
         groups: [
             {
-                "title": "預設群組",
-                "items": "範例\n在這裡輸入選項\n用換行來區隔不同選項\n例如\n選項一\n選項二\n不同選項\n按旁邊的加號可以新增群組\n點選圓圈處選擇要使用的群組",
+                "title": "기본그룹",
+                "items": "여기에 옵션을 입력합니다.",
             }
         ],
         activedIndex: 0,
@@ -90,8 +92,8 @@ let items = new Vue({
             this.actived = "group-0"
             this.groups = [
                 {
-                    "title": "預設群組",
-                    "items": "範例\n在這裡輸入選項\n用換行來區隔不同選項\n例如\n選項一\n選項二\n不同選項\n按旁邊的加號可以新增群組\n點選圓圈處選擇要使用的群組",
+                    "title": "기본그룹",
+                    "items": "여기에 옵션을 입력합니다.",
                 }
             ]
         },

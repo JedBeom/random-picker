@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>隨機選擇器</title>
+    <title>무작위 선택기</title>
     <link rel="icon" type="image/png" href="images/favicon.svg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no" />
@@ -27,17 +27,16 @@
                 <div class="nav-inner container">
                     <a class="navbar-brand" id="blogo">
                         <img width="25" height="30" class="d-inline-block align-top brand-logo" v-bind:class="{'active': running}" src="images/favicon.svg" alt="fav">
-                        隨機選擇器
+                        무작위 선택기 OnAir x 제고라이프
                         <img src="data:image/gif;base64,R0lGODlhFwALAJEAAP///wBmmf///wAAACH5BAUUAAIALAAAAAAXAAsAAAImVI6pa+sP4wP0UBCuxYtjboVZV2WlpyneiKxsksYiKNV21NyKUAAAOw==">
                     </a>
+                    <!--
                     <ul class="navbar-nav ml-md-auto">
                         <li class="nav-item">
-                            <a href="#item-setting" class="nav-link">選項設定</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#web-info" class="nav-link">關於本站</a>
+                            <a href="#item-setting" class="nav-link">환경설정</a>
                         </li>
                     </ul>
+                -->
                 </div>
             </nav>
         </div>
@@ -50,6 +49,7 @@
                         {{items[index]}}
                     </h3>
                 </div>
+                {{title}}
                 <div class="run-result-container text-center">
                     <button class="btn btn-primary shake-slow shake-constant shake-freeze" @click="runCycle" v-bind:disabled="running">
                         <span class="spinner-border spinner-border-sm" v-bind:class="{'d-none': !running}" role="status" aria-hidden="true"></span>
@@ -59,18 +59,18 @@
             </div>   
             <hr id="item-setting"/>
             <div class="items-container py-3" id="items">
-                <h3 class="item-container-title text-center mb-5">選項設定</h3>
+                <h3 class="item-container-title text-center mb-5">환경설정</h3>
                 <div class="row row-cols-1 row-cols-md-3 cards">
                     <div class="col mb-4" v-for="(group,index) in groups">
                         <div class="card bg-transparent" v-bind:class="actived=='group-' + index? 'card-active' : ''" v-bind:id="'group-' + index">
                             <div class="card-header">
                                 <h5 class="card-title mb-0">
                                     <i class="far fa-circle" @click="setActive(index)"></i>
-                                    <input type="text" name="card-title" placeholder="群組名稱" v-model="group.title">
+                                    <input type="text" name="card-title" placeholder="그룹 이름" v-model="group.title">
                                 </h5>
                             </div>
                             <div class="card-body">
-                                <textarea placeholder="請輸入選項，用「換行」來分隔不同選項。" v-model="group.items"></textarea>
+                                <textarea placeholder="옵션을 입력하고 줄바꿈으로 구분해주세요." v-model="group.items"></textarea>
                             </div>
                         </div>
                     </div>
@@ -84,46 +84,11 @@
                 </div>
                 <div class="clear-container text-right">
                     <input type="file" name="importSetting" id="importSetting" class="d-none" @change="importOption">
-                    <label class="btn btn-outline-info mb-0" for="importSetting">匯入</label>
-                    <button class="btn btn-outline-info" @click="exportOption">匯出</button>
-                    <button class="btn btn-danger" @click="emptyGroup">重置</button>
+                    <label class="btn btn-outline-info mb-0" for="importSetting">불러오기</label>
+                    <button class="btn btn-outline-info" @click="exportOption">내보내기</button>
+                    <button class="btn btn-danger" @click="emptyGroup">초기화</button>
                 </div>
             </div>     
-            <hr id="web-info"/>
-            <div class="info-container py-3">
-                <h3 class="info-container-title text-center mb-5">關於本站</h3>
-                <div class="info-block text-center">
-                    <p>
-                        本站是以 JavaScript 所撰寫的一個隨機選擇器，開放原始碼於 
-                        <a href="//github.com/luswdev/random-picker">GitHub</a> 
-                        上。
-                    </p>
-                    <h4 class="mt-5">免責聲明</h4>
-                    <p>
-                        本站將不會儲存使用者的任何資訊，相關使用者設定將以 cookies 儲存於使用者本機。
-                    </p>
-                    <h4 class="mt-5">相關程式庫</h4>
-                    <p id="dependence-lib">
-                        以下將會列出本站所使用的開源程式庫：<br><br>
-                        <a v-for="lib in dependence" :href="lib.url" target="_blank">
-                            <img :src="'images/' + lib.logo" :alt="lib.name" class="lib-logo m-3" data-toggle="tooltip" data-html="true" data-placement="top" :title="'<b>'+ lib.name + '</b><br>' + lib.description">
-                        </a>
-                    </p>
-                    <h4 class="mt-5">版本資訊</h4>
-                    <p>
-                        <table class="mx-auto" id="version">
-                            <tbody>
-                                <tr v-for="log in versions">
-                                    <td class="px-3 py-2">
-                                        <b>v{{log.ver}}</b>
-                                    </td>
-                                    <td class="px-3 py-2" v-html="log.note.join('<br>')"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </p>
-                </div>
-            </div>
         </div>
     </main>
     <footer>
