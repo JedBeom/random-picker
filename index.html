@@ -6,16 +6,12 @@
     <meta name="viewport" content="width=device-width, user-scalable=no" />
     <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.0/css/all.min.css">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <link href="//fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/csshake/1.5.3/csshake.min.css" integrity="sha512-RliK2gk03WxUELn57ddjWLhEfhUiOZ85VvWLImFy8A7FOPMkF4Z9YGQ3VKX5jpwkEerAL6I0nC+JNeCPrxWBTw==" crossorigin="anonymous" />
 
     <script src="//code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="//unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 
     <link rel="stylesheet" href="styles/main.css">
@@ -44,12 +40,16 @@
     <main>
         <div class="main-inner container">
             <div class="result-container py-3" id="app">
-                <div class="result-label text-center">
+                <div class="result-label text-center" tabindex="0" @keydown.enter="runCycle" @keydown.right="nextItem" @keydown.left="prvItem">
+                    <div>
+                    <h4 v-if="title" class="title">
+                        {{title}} 당첨자는?
+                    </h4>
                     <h3 id="result-value" v-bind:class="{'running': running}" v-bind:title="items[index]" data-toggle="tooltip" data-placement="top" >
                         {{items[index]}}
                     </h3>
+                    </div>
                 </div>
-                {{title}}
                 <div class="run-result-container text-center">
                     <button class="btn btn-primary shake-slow shake-constant shake-freeze" @click="runCycle" v-bind:disabled="running">
                         <span class="spinner-border spinner-border-sm" v-bind:class="{'d-none': !running}" role="status" aria-hidden="true"></span>
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="clear-container text-right">
+                <div class="clear-container text-right mb-6 pb-6">
                     <input type="file" name="importSetting" id="importSetting" class="d-none" @change="importOption">
                     <label class="btn btn-outline-info mb-0" for="importSetting">불러오기</label>
                     <button class="btn btn-outline-info" @click="exportOption">내보내기</button>
@@ -91,17 +91,16 @@
             </div>     
         </div>
     </main>
+    <!--
     <footer>
-        <div class="footer-inner copyright container py-3" id="copyright">
-            <hr />
-            <span>&copy; 2020 LuSkywalker {{versions}}</span>
-        </div>
         <div class="text-right fixed-bottom m-3" v-bind:style="styles" id="b2t-container">
             <button class="btn btn-danger rounded-circle" id="b2t" onclick="javascript:document.body.scrollTop = 0">
                 <i class="fas fa-chevron-up"></i>
             </button>
         </div>
     </footer>
+-->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
     <script src="scripts/index.js"></script>
 </body>
 </html>

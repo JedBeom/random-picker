@@ -1,3 +1,14 @@
+@font-face {
+    font-family: 'Cafe24Ohsquare';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Cafe24Ohsquare.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: 'Cafe24Ohsquare';
+}
+
 body {
     background: #272D38;
     color: #93969c;
@@ -48,7 +59,7 @@ main {
 }
 
 main .result-label {
-    height: 70vh;
+    height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -307,4 +318,9 @@ tr:last-child {
 
 #app {
     height: 100%;
+}
+
+h4.title {
+    font-size: 6vh;
+    display: block;
 }

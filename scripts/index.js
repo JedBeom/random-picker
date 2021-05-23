@@ -7,7 +7,7 @@ let app = new Vue({
         running: false,
         eventBuffer: null,
         speed: 5,
-        startTime: 200,
+        startTime: 100,
         durning: 100,
         fastDurning: 1500
     },
@@ -21,6 +21,18 @@ let app = new Vue({
                     resolve(2)
                 }, delayInms)
             })
+        },
+        nextItem: function () {
+            let next = items.activedIndex+1
+            if (items.groups[next]) {
+                items.setActive(next)
+            }
+        },
+        prvItem: function () {
+            let prv = items.activedIndex-1
+            if (items.groups[prv]) {
+                items.setActive(prv)
+            }
         },
         runCycle: async function () {
             $('[data-toggle="tooltip"]').tooltip('dispose')
@@ -68,6 +80,43 @@ let app = new Vue({
             
             setTimeout( () => {
                 clearInterval(this.eventBuffer)
+
+                var end = Date.now() + (5 * 1000);
+
+                var count = 200;
+                var defaults = {
+                origin: { y: 0.3 }
+                };
+
+                function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio)
+                }));
+                }
+
+                fire(0.25, {
+                spread: 26,
+                startVelocity: 55,
+                });
+                fire(0.2, {
+                spread: 60,
+                });
+                fire(0.35, {
+                spread: 100,
+                decay: 0.91,
+                scalar: 0.8
+                });
+                fire(0.1, {
+                spread: 120,
+                startVelocity: 25,
+                decay: 0.92,
+                scalar: 1.2
+                });
+                fire(0.1, {
+                spread: 120,
+                startVelocity: 45,
+                });
+
                 this.running = false
                 $('[data-toggle="tooltip"]').tooltip()
             }, this.durning)
@@ -81,7 +130,7 @@ let items = new Vue({
         groups: [
             {
                 "title": "기본그룹",
-                "items": "여기에 옵션을 입력합니다.",
+                "items": "옵션1\n옵션2",
             }
         ],
         activedIndex: 0,
@@ -93,7 +142,7 @@ let items = new Vue({
             this.groups = [
                 {
                     "title": "기본그룹",
-                    "items": "여기에 옵션을 입력합니다.",
+                    "items": "옵션1\n옵션2",
                 }
             ]
         },
@@ -135,39 +184,7 @@ let items = new Vue({
     }
 })
 
-axios.get(`data/website-info.json?nocache=${new Date()}`)
-    .then(function (response) {
-        let json = response.data;
-
-        let depLib = new Vue({
-            el: '#dependence-lib',
-            data: {
-                dependence: json.dependence
-            },
-            mounted: function () {
-                $('[data-toggle="tooltip"]').tooltip()
-            }
-        }) 
-        
-        let ver = new Vue({
-            el: '#version',
-            data: {
-                versions: json.changeLog
-            }
-        }) 
-
-        let copyright = new Vue({
-            el: '#copyright',
-            data: {
-                versions: json.changeLog.reverse()[0].ver
-            }
-        }) 
-    })
-    .catch(function (error) {
-        console.log(error);
-    })
-
-
+/*
 let b2t = new Vue({
     el: '#b2t-container',
     data: {
@@ -183,6 +200,7 @@ let b2t = new Vue({
         })
     }
 })
+*/
 
 let blogo = new Vue({
     el: '#blogo',
